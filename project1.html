@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Amazon Clone</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background-color: #f3f3f3; }
+
+        /* Header */
+        header { background-color: #232f3e; color: white; padding: 10px 0; }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .logo { font-size: 24px; font-weight: bold; color: #ff9900; }
+        .location { font-size: 14px; }
+        .account, .cart { font-size: 14px; cursor: pointer; }
+
+        /* Search Bar */
+        .search-container { max-width: 1200px; margin: 20px auto 0; padding: 0 20px; }
+        .search-bar { display: flex; background-color: white; border-radius: 4px; overflow: hidden; }
+        .search-select { width: 10%; padding: 12px; border-right: 1px solid #ddd; background: #f7f7f7; }
+        .search-input { flex: 1; padding: 12px 16px; border: none; font-size: 16px; }
+        .search-input:focus { outline: none; }
+        .search-btn { width: 10%; background-color: #ff9900; color: white; border: none; padding: 12px; cursor: pointer; font-size: 16px; }
+        .search-btn:hover { background-color: #e77a00; }
+
+        /* Main Content */
+        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .banner { background: linear-gradient(to right, #ff9900, #232f3e); color: white; text-align: center; padding: 50px 20px; border-radius: 8px; margin-bottom: 30px; }
+        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .product { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s; }
+        .product:hover { transform: translateY(-5px); }
+        .product img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+        .product h3 { margin: 10px 0; color: #232f3e; }
+        .product-price { font-size: 20px; font-weight: bold; color: #b12704; margin: 10px 0; }
+        .add-btn { background: #ff9900; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%; }
+        .add-btn:hover { background: #e77a00; }
+
+        /* Author Footer */
+        .author-credit { position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 4px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-family: monospace; }
+        .author-credit a { color: #ff9900; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .nav-top { flex-direction: column; gap: 5px; text-align: center; }
+            .search-select, .search-btn { width: 15%; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-top">
+            <div class="logo">Amazon.in</div>
+            <div class="location">Ghaziabad, UP</div>
+            <div class="account">Account & Lists</div>
+            <div class="cart">Cart</div>
+        </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-bar">
+            <select class="search-select">
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Books</option>
+            </select>
+            <input type="text" class="search-input" placeholder="Search Amazon...">
+            <button class="search-btn">🔍</button>
+        </div>
+    </div>
+
+    <main>
+        <div class="banner">
+            <h1>Welcome to Your Amazon Clone!</h1>
+            <p>Shop electronics, books, and more.</p>
+        </div>
+        <section class="products">
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200/ff9900/ffffff?text=Laptop" alt="Laptop">
+                <h3>Gaming Laptop</h3>
+                <div class="product-price">₹49,999</div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200/232f3e/ffffff?text=Headphones" alt="Headphones">
+                <h3>Wireless Headphones</h3>
+                <div class="product-price">₹2,499</div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200/ff9900/ffffff?text=Book" alt="Book">
+                <h3>DSA Book</h3>
+                <div class="product-price">₹999</div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/250x200/232f3e/ffffff?text=Mouse" alt="Mouse">
+                <h3>Wireless Mouse</h3>
+                <div class="product-price">₹799</div>
+                <button class="add-btn">Add to Cart</button>
+            </div>
+        </section>
+    </main>
+
+    <div class="author-credit">
+        Name : Sparsh Singh<br>
+        Admission No: 2025b0101011238
+    </div>
+</body>
+</html>
