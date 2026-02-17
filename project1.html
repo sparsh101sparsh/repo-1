@@ -1,109 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Amazon Clone</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background-color: #f3f3f3; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AJIO – Luxe Fashion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+ --primary: #0a1d37;
+--accent: #ff3c00;
+--light: #f9f9fc;
+--shadow-soft: 0 12px 40px rgba(10,29,55,0.12);
+ }
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+font-family: 'Inter', sans-serif;
+ background: linear-gradient(135deg, #f9f9fc 0%, #f0f2f8 100%);
+color: var(--primary);
+overflow-x: hidden;
+cursor: none;
+} 
 
-        /* Header */
-        header { background-color: #232f3e; color: white; padding: 10px 0; }
-        .nav-top { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .logo { font-size: 24px; font-weight: bold; color: #ff9900; }
-        .location { font-size: 14px; }
-        .account, .cart { font-size: 14px; cursor: pointer; }
-
-        /* Search Bar */
-        .search-container { max-width: 1200px; margin: 20px auto 0; padding: 0 20px; }
-        .search-bar { display: flex; background-color: white; border-radius: 4px; overflow: hidden; }
-        .search-select { width: 10%; padding: 12px; border-right: 1px solid #ddd; background: #f7f7f7; }
-        .search-input { flex: 1; padding: 12px 16px; border: none; font-size: 16px; }
-        .search-input:focus { outline: none; }
-        .search-btn { width: 10%; background-color: #ff9900; color: white; border: none; padding: 12px; cursor: pointer; font-size: 16px; }
-        .search-btn:hover { background-color: #e77a00; }
-
-        /* Main Content */
-        main { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .banner { background: linear-gradient(to right, #ff9900, #232f3e); color: white; text-align: center; padding: 50px 20px; border-radius: 8px; margin-bottom: 30px; }
-        .products { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
-        .product { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); text-align: center; transition: transform 0.2s; }
-        .product:hover { transform: translateY(-5px); }
-        .product img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
-        .product h3 { margin: 10px 0; color: #232f3e; }
-        .product-price { font-size: 20px; font-weight: bold; color: #b12704; margin: 10px 0; }
-        .add-btn { background: #ff9900; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; width: 100%; }
-        .add-btn:hover { background: #e77a00; }
-
-        /* Author Footer */
-        .author-credit { position: fixed; bottom: 10px; right: 10px; font-size: 12px; color: #666; background: rgba(255,255,255,0.9); padding: 8px 12px; border-radius: 4px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); font-family: monospace; }
-        .author-credit a { color: #ff9900; text-decoration: none; }
-
-        @media (max-width: 768px) {
-            .nav-top { flex-direction: column; gap: 5px; text-align: center; }
-            .search-select, .search-btn { width: 15%; }
-        }
-    </style>
+header {
+position: sticky; top:0; z-index:1000;
+background: rgba(255,255,255,0.92);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid rgba(10,29,55,0.08);
+}
+.product-card {
+border-radius: 20px; overflow:hidden;
+background: white;
+box-shadow: var(--shadow-soft);
+transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+position: relative;
+}
+.product-card:hover {
+transform: translateY(-16px) scale(1.05);
+box-shadow: 0 32px 80px rgba(10,29,55,0.25);
+}
+.product-card img {
+transition: transform 0.7s ease;
+height: 380px;
+width: 100%;
+object-fit: cover;
+}
+.product-card:hover img { transform: scale(1.09); }
+.hero {
+height: 100vh; min-height: 680px; position:relative; overflow:hidden;
+background: linear-gradient(45deg, #0a1d37 0%, #1e3a5f 100%);
+}
+.hero img { width:100%; height:100%; object-fit:cover; opacity:0.82; }
+.hero-overlay { position:absolute; inset:0; background: linear-gradient(to bottom, rgba(10,29,55,0.45), rgba(10,29,55,0.8)); }
+.hero-content {
+position:absolute; bottom:20%; left:50%; transform:translateX(-50%);
+text-align:center; color:white; text-shadow:0 6px 25px rgba(0,0,0,0.7);
+}
+h1.hero-title {
+font-family:'Playfair Display', serif;
+font-size: clamp(5rem, 12vw, 12rem);
+font-weight:700; letter-spacing:-4px; line-height:0.9;
+}.hero-subtitle { font-size:2.5rem; font-weight:400; margin:0.5em 0 1.5em; opacity:0.95; }
+.btn-hero {
+background: var(--accent); color:white; font-weight:600;
+padding:1.4em 4.5em; border:none; border-radius:60px;
+font-size:1.4rem; cursor:pointer; transition:all 0.4s ease;
+box-shadow:0 12px 40px rgba(255,60,0,0.4);
+}
+.btn-hero:hover { transform:scale(1.1); box-shadow:0 20px 60px rgba(255,60,0,0.55); }
+section { padding:140px 0; }
+h2.section-title {
+font-family:'Playfair Display', serif;
+font-size:4.2rem; text-align:center; margin-bottom:4rem;
+background: linear-gradient(90deg, #0a1d37, #ff3c00, #0a1d37);
+-webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}.carousel {
+display:flex; gap:32px; overflow-x:auto; padding:3rem 60px;
+scroll-snap-type:x mandatory; scrollbar-width:none;
+}
+.carousel::-webkit-scrollbar { display:none; }
+footer {
+background: var(--primary); color:#ddd; padding:120px 60px 60px;
+font-size:1rem;
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="nav-top">
-            <div class="logo">Amazon.in</div>
-            <div class="location">Ghaziabad, UP</div>
-            <div class="account">Account & Lists</div>
-            <div class="cart">Cart</div>
-        </div>
-    </header>
 
-    <div class="search-container">
-        <div class="search-bar">
-            <select class="search-select">
-                <option>All</option>
-                <option>Electronics</option>
-                <option>Books</option>
-            </select>
-            <input type="text" class="search-input" placeholder="Search Amazon...">
-            <button class="search-btn">🔍</button>
-        </div>
-    </div>
+<div class="cursor" id="cursor"></div>
+<script>
+const cursor = document.getElementById('cursor');
+let mouseX = 0, mouseY = 0, cursorX = 0, cursorY = 0;
+document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+function animate() {
+cursorX += (mouseX - cursorX) * 0.16;
+cursorY += (mouseY - cursorY) * 0.16;
+cursor.style.left = cursorX + 'px';
+cursor.style.top  = cursorY + 'px';
+requestAnimationFrame(animate);
+}
+animate();
+</script>
 
-    <main>
-        <div class="banner">
-            <h1>Welcome to Your Amazon Clone!</h1>
-            <p>Shop electronics, books, and more.</p>
-        </div>
-        <section class="products">
-            <div class="product">
-                <img src="https://via.placeholder.com/250x200/ff9900/ffffff?text=Laptop" alt="Laptop">
-                <h3>Gaming Laptop</h3>
-                <div class="product-price">₹49,999</div>
-                <button class="add-btn">Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250x200/232f3e/ffffff?text=Headphones" alt="Headphones">
-                <h3>Wireless Headphones</h3>
-                <div class="product-price">₹2,499</div>
-                <button class="add-btn">Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250x200/ff9900/ffffff?text=Book" alt="Book">
-                <h3>DSA Book</h3>
-                <div class="product-price">₹999</div>
-                <button class="add-btn">Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="https://via.placeholder.com/250x200/232f3e/ffffff?text=Mouse" alt="Mouse">
-                <h3>Wireless Mouse</h3>
-                <div class="product-price">₹799</div>
-                <button class="add-btn">Add to Cart</button>
-            </div>
-        </section>
-    </main>
+<header>
+<div style="max-width:1440px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:0 60px; height:90px;">
+<div style="font-family:'Playfair Display', serif; font-size:48px; font-weight:700; color:var(--primary); letter-spacing:-3px; cursor:pointer;">
+AJIO
+</div>
+<nav style="display:flex; gap:70px; font-weight:500; font-size:16px; text-transform:uppercase; letter-spacing:1.5px;">
+<a href="#" style="text-decoration:none; color:var(--primary);">MEN</a>
+<a href="#" style="text-decoration:none; color:var(--primary);">WOMEN</a>
+<a href="#" style="text-decoration:none; color:var(--primary);">KIDS</a>
+<a href="#" style="text-decoration:none; color:var(--primary);">ETHNIC</a>
+<a href="#" style="text-decoration:none; color:var(--accent);">BEAUTY</a>
+</nav>
+<div style="display:flex; align-items:center; gap:40px;">
+ <div style="position:relative;">
+<input type="text" placeholder="Search elegance..." 
+style="width:360px; height:52px; padding:0 60px 0 28px; border:none; border-radius:999px; background:rgba(10,29,55,0.08); font-size:16px; outline:none;"/>
+<span style="position:absolute; right:24px; top:50%; transform:translateY(-50%); color:var(--accent); font-size:24px;">🔍</span>
+</div>
+<div style="font-size:32px; cursor:pointer;">👤</div>
+<div style="font-size:32px; cursor:pointer;">♡</div>
+<div style="font-size:32px; cursor:pointer;">🛍</div>
+</div>
+</div>
+</header>
 
-    <div class="author-credit">
-        Name : Sparsh Singh<br>
-        Admission No: 2025b0101011238
-    </div>
+<div class="hero">
+<img src="hero.jpg" alt="Luxury Fashion Hero">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<h1 class="hero-title">LUXE<br>UNVEILED</h1>
+<div class="hero-subtitle">Timeless Pieces • Up to 75% Off + Extra Rewards</div>
+<button class="btn-hero">Discover Now</button>
+</div>
+</div>
+
+<section>
+<h2 class="section-title">Women's Fashion – Timeless Elegance</h2>
+<div class="carousel" style="max-width:1440px; margin:0 auto;">
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+<img src="floral-dress.jpg" alt="Floral Dress">
+<div style="padding:28px; text-align:center;">
+<div style="font-weight:600; font-size:1.4rem;">Sangria</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Floral Maxi Dress</div>
+<div style="font-weight:700; font-size:1.5rem;">
+ ₹1,499 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹4,299</span> <span style="color:#00a650;">65% OFF</span>
+</div>
+</div>
+</div>
+</a>
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+<img src="kurta-set-women.jpg" alt="Kurta Set">
+<div style="padding:28px; text-align:center;">
+<div style="font-weight:600; font-size:1.4rem;">Biba</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Printed Kurta Set</div>
+<div style="font-weight:700; font-size:1.5rem;">
+₹1,399 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹3,499</span> <span style="color:#00a650;">60% OFF</span>
+</div>
+ </div>
+</div>
+</a>
+    
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Men's Fashion – Bold & Refined</h2>
+<div class="carousel" style="max-width:1440px; margin:0 auto;">
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+ <img src="slim-jeans.jpg" alt="Slim Jeans">
+<div style="padding:28px; text-align:center;">
+<div style="font-weight:600; font-size:1.4rem;">Roadster</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Slim Fit Jeans</div>
+<div style="font-weight:700; font-size:1.5rem;">
+₹899 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹2,499</span> <span style="color:#00a650;">64% OFF</span>
+</div>
+</div>
+</div>
+</a>
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+<img src="polo-tshirt.jpg" alt="Polo T-Shirt">
+<div style="padding:28px; text-align:center;">
+<div style="font-weight:600; font-size:1.4rem;">Allen Solly</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Polo T-Shirt</div>
+<div style="font-weight:700; font-size:1.5rem;">
+ ₹799 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹1,799</span> <span style="color:#00a650;">55% OFF</span>
+</div>
+</div>
+</div>
+</a>
+  </div>
+</section>
+
+<section>
+<h2 class="section-title">Kids' Fashion – Playful & Adorable</h2>
+<div class="carousel" style="max-width:1440px; margin:0 auto;">
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+<img src="kids-tshirt.jpg" alt="Kids T-Shirt">
+ <div style="padding:28px; text-align:center;">
+<div style="font-weight:600; font-size:1.4rem;">H&M Kids</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Printed T-Shirt Set</div>
+<div style="font-weight:700; font-size:1.5rem;">
+ ₹599 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹1,199</span> <span style="color:#00a650;">50% OFF</span>
+</div>
+</div>
+</div>
+</a>
+
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Ethnic Wear – Festive Grace</h2>
+<div class="carousel" style="max-width:1440px; margin:0 auto;">
+<a href="#" style="text-decoration:none;">
+<div class="product-card">
+<img src="kurta-set-ethnic.jpg" alt="Kurta Set">
+<div style="padding:28px; text-align:center;">
+ <div style="font-weight:600; font-size:1.4rem;">Manyavar</div>
+<div style="color:#666; margin:10px 0; font-size:1.1rem;">Embroidered Kurta Pyjama</div>
+<div style="font-weight:700; font-size:1.5rem;">
+₹2,999 <span style="color:var(--accent); margin:0 12px; text-decoration:line-through;">₹6,999</span> <span style="color:#00a650;">57% OFF</span>
+</div>
+</div>
+</div>
+</a>
+    
+</div>
+</section>
+
+<footer>
+<div style="max-width:1440px; margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:80px; padding:0 60px;">
+<div><h4 style="color:#fff; margin-bottom:24px;">SHOP</h4><div>Men</div><div>Women</div><div>Kids</div><div>Ethnic</div></div>
+<div><h4 style="color:#fff; margin-bottom:24px;">AJIO</h4><div>About</div><div>Careers</div><div>Press</div></div>
+</div>
+<div style="text-align:center; margin-top:100px; padding-top:50px; border-top:1px solid rgba(255,255,255,0.15);">
+    © made by Sparsh singh
+  </div>
+</footer>
+
 </body>
 </html>
